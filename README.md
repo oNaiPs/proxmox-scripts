@@ -1,6 +1,37 @@
 # proxmox_scripts
 
-Set of Proxmox scripts that can be useful for anyone
+Set of Proxmox scripts that can be useful for anyone.
+
+Tested on Proxmox VE 8.
+
+## Run a command in all nodes
+
+Write the following script into a file name `cssh`:
+```bash
+#!/bin/bash
+if [ ! -n "$1" ]; then echo "Usage: $0 [command]"; else
+for n in $(cat /etc/pve/.members  | jq -r '.nodelist[].ip'); do
+echo --- $n -----------------------------------------------------
+ssh -T $n "$@"
+done
+fi
+```
+
+Example output:
+```bash
+root@proxmox-1:~# chmod ./cssh
+root@proxmox-1:~# ./cssh cat /etc/debian_version
+--- 192.168.1.10 -----------------------------------------------------
+12.2
+--- 192.168.1.10 -----------------------------------------------------
+12.2
+--- 192.168.1.11 -----------------------------------------------------
+12.2
+--- 192.168.1.12 -----------------------------------------------------
+12.2
+--- 192.168.1.13 -----------------------------------------------------
+12.2
+```
 
 ## [lxc_create_github_actions_runner.sh](./lxc_create_github_actions_runner.sh)
 
