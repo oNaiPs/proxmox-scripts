@@ -11,8 +11,8 @@ Write the following script into a file name `cssh`:
 #!/bin/bash
 if [ ! -n "$1" ]; then echo "Usage: $0 [command]"; else
 for n in $(cat /etc/pve/.members  | jq -r '.nodelist[].ip'); do
-echo --- $n -----------------------------------------------------
-ssh -T $n "$@"
+  echo --- $n -----------------------------------------------------
+  ssh -T $n "$@"
 done
 fi
 ```
