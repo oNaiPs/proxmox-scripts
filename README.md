@@ -6,6 +6,8 @@ Tested on Proxmox VE 8.
 
 ## Run a command in all nodes
 
+Needs `jq`. Install with `apt update && apt install -y jq`
+
 Write the following script into a file name `cssh`:
 ```bash
 #!/bin/bash
