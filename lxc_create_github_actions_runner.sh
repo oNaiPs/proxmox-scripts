@@ -69,7 +69,7 @@ log "-- Starting container"
 pct start "$PCTID"
 sleep 10
 log "-- Running updates"
-pct exec "$PCTID" -- bash -c "apt update -y && apt install -y git curl && passwd -d root"
+pct exec "$PCTID" -- bash -c "apt update -y && apt install -y git curl zip && passwd -d root"
 
 # Install Docker inside the container
 log "-- Installing docker"
